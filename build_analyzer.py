@@ -7,7 +7,7 @@ if platform.system().lower() == "darwin":
     dylib_ext = ".dylib"
 else:
     dylib_ext = ".so"
-    
+
 print "Running on " + platform.system()
 
 #make sure the release folder exists, and clean out any .o/.so file if there are any
@@ -50,10 +50,10 @@ release_compile_flags = "-O3 -w -c -fpic"
 for cpp_file in cpp_files:
 
     #g++
-    command = "g++ "
+    command = "g++ -arch i386 "
 
     #include paths
-    for path in include_paths: 
+    for path in include_paths:
         command += "-I\"" + path + "\" "
 
     release_command = command
@@ -71,10 +71,10 @@ for cpp_file in cpp_files:
     os.system( release_command )
     print debug_command
     os.system( debug_command )
-    
+
 #lastly, link
 #g++
-command = "g++ "
+command = "g++ -arch i386 "
 
 #add the library search paths
 for link_path in link_paths:
@@ -110,11 +110,11 @@ else:
 for cpp_file in cpp_files:
     release_command += "release/" + cpp_file.replace( ".cpp", ".o" ) + " "
     debug_command += "debug/" + cpp_file.replace( ".cpp", ".o" ) + " "
-    
+
 #run the commands from the command line
 print release_command
 os.system( release_command )
 print debug_command
 os.system( debug_command )
 
-        
+
